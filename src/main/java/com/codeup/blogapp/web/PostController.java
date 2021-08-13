@@ -13,7 +13,7 @@ public class PostController {
     private final ArrayList<Post> posts;
 
     PostController() {
-        posts = new ArrayList<>() {
+        posts = new ArrayList<Post>() {
             {
                 add(new Post(0L, "Minimalism", "Minimalism is all about living with less."));
                 add(new Post(1L, "Atomic Habits", "Build a system for getting 1% better every day."));
@@ -33,7 +33,7 @@ public class PostController {
         return posts.get(id);
     }
 
-    @PostMapping
+    @PostMapping(produces = "application/json")
     private void createPost(@RequestBody Post post) {
         int id = posts.size();
         post.setId((long) id);
@@ -48,6 +48,6 @@ public class PostController {
 
     @DeleteMapping("/{id}")
     private void deletePost(@PathVariable int id) {
-        posts.remove(id);
+        posts.removeIf(post -> post.getId() == id);
     }
 }

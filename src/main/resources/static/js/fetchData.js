@@ -1,4 +1,3 @@
-
 /**
  * Given an object containing all the required data for a given page, fetch all the needed data and return it as properties to pass to a view.
  * @param state
@@ -15,7 +14,9 @@ export default function fetchData(state, request) {
         promises.push(
             fetch(baseUri + state[pieceOfState], request)
                 .then(function (res) {
-                    return res.json();
+                    console.log(res.body)
+                    console.log(res.bodyUsed)
+                    return res.body ? res.json() : false;
                 }));
     }
     return Promise.all(promises).then(propsData => {
