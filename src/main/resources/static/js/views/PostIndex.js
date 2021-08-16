@@ -31,8 +31,8 @@ function printOutBlogs(post) {
                 <div class=" card shadow-sm p-1">
                       <h5 contenteditable="false" class="title"> ${post.title}</h5>
                       <p contenteditable="false"  class="content">${post.content}</p>
-                      <button data-id="${post.id}" class="col btn-sm edit-save-btn" type="submit"> Edit </button>
-                      <button data-id="${post.id}" class="col btn-sm delete-cancel-btn" type="submit"> Delete </button>
+                      <button data-id="${post.id}" class="col btn-sm edit-save-btn" > Edit </button>
+                      <button data-id="${post.id}" class="col btn-sm delete-cancel-btn" > Delete </button>
                  </div>
              </div>
     `
@@ -73,10 +73,12 @@ function createPost() {
 function editPost() {
     $(".edit-save-btn").click(function () {
         $(this).text("Save");
-        $(".delete-cancel-btn").text("Cancel");
+        $(this).siblings(".delete-cancel-btn").text("Cancel");
         let editableFields = ($(this).siblings("[contenteditable]"));
         editableFields.attr("contenteditable", "true");
         editableFields.toggleClass("form-control");
+        $(this).siblings('.title').attr("data-oldText",$(this).siblings('.title').text());
+        $(this).siblings('.content').attr("data-oldText",$(this).siblings('.content').text());
         $(this).on("click", savePost);
     });
 }
@@ -128,6 +130,8 @@ function deleteCancelPost() {
             let editableFields = ($(this).siblings("[contenteditable]"));
             editableFields.attr("contenteditable", "false");
             editableFields.toggleClass("form-control");
+            $(this).siblings('.title').text($(this).siblings('.title').attr("data-oldText"));
+            $(this).siblings('.content').text($(this).siblings('.content').attr("data-oldText"));
         }
     });
 }
