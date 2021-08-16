@@ -44,6 +44,9 @@ public class PostController {
     @PutMapping
     private void updatePost(@RequestBody Post post) {
         posts.set(Math.toIntExact(post.getId()), post);
+        System.out.println(post.getId());
+        System.out.println(post.getTitle());
+        System.out.println(post.getContent());
     }
 
     @DeleteMapping("/{id}")
