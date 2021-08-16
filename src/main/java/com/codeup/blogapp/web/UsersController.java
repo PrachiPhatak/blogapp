@@ -18,6 +18,7 @@ public class UsersController {
     UsersController(){
         users = new HashMap<>();
         users.put(1,new User(1L, "Prachi", "prachi@codeup.com","*****"));
+        users.put(2,new User(2L, "Casey", "casey@codeup.com","*****"));
     }
 
     @GetMapping("/{id}")
@@ -26,16 +27,19 @@ public class UsersController {
         return users.get(id);
     }
 
-//    @GetMapping("/{userName}")
-//    private User findByUserName(@PathVariable String userName){
-//        User user = new User();
-//        for(Map.Entry<Integer, User>userEntry : users.entrySet()){
-//            user = userEntry.getValue();
-//            if(user.getUserName().equals(userName))
-//                return user;
-//        }
-//        return user;
-//    }
+    @GetMapping("findByUsername/{userName}")
+    private User findByUserName(@PathVariable String userName){
+        User user = new User();
+        for(Map.Entry<Integer, User>userEntry : users.entrySet()){
+            user = userEntry.getValue();
+            System.out.println(userName);
+            System.out.println(user.getUserName());
+            System.out.println(user.getUserName().equals(userName));
+            if(user.getUserName().equals(userName))
+                return user;
+        }
+        return new User();
+    }
 //
 //    @GetMapping("/{email}")
 //    private User findByUserEmail(@PathVariable String email){
