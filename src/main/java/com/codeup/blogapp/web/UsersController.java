@@ -1,10 +1,7 @@
 package com.codeup.blogapp.web;
 
 import com.codeup.blogapp.data.User;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,17 +37,33 @@ public class UsersController {
         }
         return new User();
     }
-//
-//    @GetMapping("/{email}")
-//    private User findByUserEmail(@PathVariable String email){
-//        User user = new User();
-//        for(Map.Entry<Integer, User>userEntry : users.entrySet()){
-//            user = userEntry.getValue();
-//            if(user.getEmail().equals(email))
-//                return user;
-//        }
-//        return user;
-//    }
 
+    @GetMapping("findByEmail/{email}")
+    private User findByUserEmail(@PathVariable String email){
+        User user = new User();
+        for(Map.Entry<Integer, User>userEntry : users.entrySet()){
+            user = userEntry.getValue();
+            if(user.getEmail().equals(email))
+                return user;
+        }
+        return user;
+    }
+
+    @PostMapping
+    private void createUser(@RequestBody User user){
+        int id = users.size();
+        user.setId(id);
+        users.put(id, user);
+    }
+
+    @PutMapping
+    private void updateUser(@RequestBody User user){
+        users.replace((int) user.getId(), user);
+    }
+
+    @DeleteMapping("/{id}")
+    private void deleteUser(@PathVariable int id){
+        users.remove(id);
+    }
 
 }
