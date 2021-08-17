@@ -40,8 +40,8 @@ public class UsersController {
         return users.get(id);
     }
 
-    @GetMapping("findByUsername/{userName}")
-    private User findByUserName(@PathVariable String userName) {
+    @GetMapping("findByUsername")
+    private User findByUserName(@RequestParam String userName) {
         User user;
         for (Map.Entry<Integer, User> userEntry : users.entrySet()) {
             user = userEntry.getValue();
@@ -54,8 +54,8 @@ public class UsersController {
         return new User();
     }
 
-    @GetMapping("findByEmail/{email}")
-    private User findByUserEmail(@PathVariable String email) {
+    @GetMapping("findByEmail")
+    private User findByUserEmail(@RequestParam String email) {
         User user = new User();
         for (Map.Entry<Integer, User> userEntry : users.entrySet()) {
             user = userEntry.getValue();
@@ -66,7 +66,7 @@ public class UsersController {
     }
 
     @PostMapping
-    private void createUser(@RequestBody User user) {
+    private void createUser(@RequestParam User user) {
         int id = users.size();
         user.setId(id);
         users.put(id, user);
