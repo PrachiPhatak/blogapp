@@ -1,6 +1,7 @@
 package com.codeup.blogapp.web;
 
 import com.codeup.blogapp.data.Post;
+import com.codeup.blogapp.data.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -11,13 +12,15 @@ import java.util.List;
 public class PostController {
 
     private final ArrayList<Post> posts;
+    private final User user;
 
     PostController() {
+        user = new User(1l, "Author", "author@blog.com", "authorPassword");
         posts = new ArrayList<Post>() {
             {
-                add(new Post(0L, "Minimalism", "Minimalism is all about living with less."));
-                add(new Post(1L, "Atomic Habits", "Build a system for getting 1% better every day."));
-                add(new Post(2L, "Mindset", "An example of a mindset is abundance versus scarcity"));
+                add(new Post(0L, "Minimalism", "Minimalism is all about living with less.", user));
+                add(new Post(1L, "Atomic Habits", "Build a system for getting 1% better every day.", user));
+                add(new Post(2L, "Mindset", "An example of a mindset is abundance versus scarcity", user));
 
             }
         };
