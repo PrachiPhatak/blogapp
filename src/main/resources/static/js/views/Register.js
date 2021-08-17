@@ -1,4 +1,7 @@
+import createView from "../createView.js";
+
 export default function Register(props) {
+    console.log(props)
     return `
     <!DOCTYPE html>
     <html lang="en">
@@ -115,7 +118,7 @@ export default function Register(props) {
 						<span class="fa fa-user"></span>
 					</span>
                                 </div>
-                                <input type="text" class="form-control" name="username" placeholder="Username" required="required">
+                                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required="required">
                             </div>
                         </div>
                         <div class="form-group">
@@ -125,7 +128,7 @@ export default function Register(props) {
 						<i class="fa fa-paper-plane"></i>
 					</span>
                                 </div>
-                                <input type="email" class="form-control" name="email" placeholder="Email Address" required="required">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required="required">
                             </div>
                         </div>
                         <div class="form-group">
@@ -135,7 +138,7 @@ export default function Register(props) {
 						<i class="fa fa-lock"></i>
 					</span>
                                 </div>
-                                <input type="text" class="form-control" name="password" placeholder="Password" required="required">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required="required">
                             </div>
                         </div>
                         <div class="form-group">
@@ -146,14 +149,14 @@ export default function Register(props) {
 						<i class="fa fa-check"></i>
 					</span>
                                 </div>
-                                <input type="text" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
+                                <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+                            <button class="submit btn btn-primary btn-lg">Sign Up</button>
                         </div>
                 </form>
                 <div class="text-center">Already have an account? <a href="#">Login here</a></div>
@@ -167,5 +170,31 @@ export default function Register(props) {
 export function RegisterEvent(){
 
     console.log("In RegisterEvent");
+
+    $(".submit").click(function (){
+        let user = {
+            id:0,
+            userName: $("#username").val(),
+            password: $("#password").val(),
+            email: $("#email").val()
+        }
+        console.log(user);
+        const url = `http://localhost:8080/api/users`;
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user)
+
+        };
+        console.log(options)
+        fetch(url, options)
+        .then(data => {
+            console.log(data)
+            createView("/")
+        })
+            .catch(error => console.error(error)); /* handle errors */
+    });
 
 }

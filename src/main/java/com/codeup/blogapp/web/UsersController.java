@@ -26,7 +26,7 @@ public class UsersController {
 
     @GetMapping("findByUsername/{userName}")
     private User findByUserName(@PathVariable String userName){
-        User user = new User();
+        User user;
         for(Map.Entry<Integer, User>userEntry : users.entrySet()){
             user = userEntry.getValue();
             System.out.println(userName);
@@ -54,6 +54,11 @@ public class UsersController {
         int id = users.size();
         user.setId(id);
         users.put(id, user);
+
+        System.out.println(user.getId());
+        System.out.println(user.getUserName());
+        System.out.println(user.getEmail());
+        System.out.println(user.getPassword());
     }
 
     @PutMapping
