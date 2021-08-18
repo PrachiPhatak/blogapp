@@ -20,6 +20,7 @@ public class UsersController {
         users = new HashMap<>();
         users.put(1, new User(1L, "Prachi", "prachi@codeup.com", "*****"));
         users.put(2, new User(2L, "Casey", "casey@codeup.com", "*****"));
+        users.put(3, new User(3L, "Admin", "admin@codeup.com", "*****"));
         posts = new ArrayList<Post>() {
             {
                 add(new Post(0L, "Minimalism",
@@ -34,13 +35,18 @@ public class UsersController {
 
     }
 
+    @GetMapping
+    private User getUser() {
+        return users.get(3);
+    }
+
     @GetMapping("/{id}")
     private User findById(@PathVariable int id) {
         System.out.println(users.get(id).getUserName());
         return users.get(id);
     }
 
-    @GetMapping("findByUsername")
+    @GetMapping("/findByUsername")
     private User findByUserName(@RequestParam String userName) {
         User user;
         for (Map.Entry<Integer, User> userEntry : users.entrySet()) {
@@ -66,7 +72,7 @@ public class UsersController {
     }
 
     @PostMapping
-    private void createUser(@RequestParam User user) {
+    private void createUser(@RequestBody User user) {
         int id = users.size();
         user.setId(id);
         users.put(id, user);

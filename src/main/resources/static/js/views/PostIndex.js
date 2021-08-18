@@ -3,13 +3,9 @@ import createView from "../createView.js";
 export default function PostIndex(props) {
 
     return `
-        <header xmlns="http://www.w3.org/1999/html">
-            <h1 class="mx-auto">Welcome To my blogs</h1>
-        </header>
         <main>
-            <div class="container row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-3">
-               
-                <div class="col mb-3">
+            <div class="container row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
+                <div class="col m-3">
                     <form id="post-form" class=" card shadow-sm p-1">
                         <h5> New Blog </h5>
                         <input id="title" class="border-box" name="title" type="text" placeholder="Blog Title"/>
@@ -27,10 +23,11 @@ export default function PostIndex(props) {
 
 function printOutBlogs(post) {
     return `
-            <div class="col mb-3">
+            <div class="col my-3">
                 <div class=" card shadow-sm p-1">
                       <h5 contenteditable="false" class="title"> ${post.title}</h5>
                       <p contenteditable="false"  class="content">${post.content}</p>
+                      <p  class="author">${post.user.userName}</p>
                       <button data-id="${post.id}" class="col btn-sm edit-save-btn" > Edit </button>
                       <button data-id="${post.id}" class="col btn-sm delete-cancel-btn" > Delete </button>
                  </div>
