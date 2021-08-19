@@ -16,6 +16,16 @@ public class Post {
         this.user = user;
     }
 
+    public Post(Long id, String title, String content, User user, Collection<Category> categories) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.user = user;
+        this.categories = categories;
+    }
+
+
+
     public Long getId() {
         return id;
     }

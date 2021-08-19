@@ -1,12 +1,12 @@
 import createView from "../createView.js";
 
 export default function PostIndex(props) {
-
+    console.log(props)
     return `
         <main>
-            <div class="container row row-cols-1 row-cols-sm-2 row-cols-md-2 g-3">
-                <div class="col m-3">
-                    <form id="post-form" class=" card shadow-sm p-1">
+            <div class="container row row-cols-1 row-cols-sm-2 row-cols-md-2 m-3">
+                <div class="col-12 m-3">
+                    <form id="post-form" class=" card shadow-sm p-3">
                         <h5> New Blog </h5>
                         <input id="title" class="border-box" name="title" type="text" placeholder="Blog Title"/>
                         <textarea cols="20"  id="content" name="content" type="text" placeholder="Content"></textarea>
@@ -22,14 +22,22 @@ export default function PostIndex(props) {
 }
 
 function printOutBlogs(post) {
+    console.log(post)
+    let categories1 = post.categories;
+    console.log(categories1);
     return `
-            <div class="col my-3">
-                <div class=" card shadow-sm p-1">
+            <div class="col m-3">
+                <div class=" card shadow-sm p-3">
                       <h5 contenteditable="false" class="title"> ${post.title}</h5>
                       <p contenteditable="false"  class="content">${post.content}</p>
-                      <p  class="author">${post.user.userName}</p>
-                      <button data-id="${post.id}" class="col btn-sm edit-save-btn" > Edit </button>
-                      <button data-id="${post.id}" class="col btn-sm delete-cancel-btn" > Delete </button>
+                      <p  class="author">By ${post.user.userName}</p>
+                       ${categories1.map(category => 
+                        `
+                        <span class="col-3 badge rounded-pill bg-secondary">#${category.name}</span>
+                        `
+                        )}                                             
+                      <button data-id="${post.id}" class="col-5 btn-sm edit-save-btn" > Edit </button>
+                      <button data-id="${post.id}" class="col-5 btn-sm delete-cancel-btn" > Delete </button>
                  </div>
              </div>
     `
