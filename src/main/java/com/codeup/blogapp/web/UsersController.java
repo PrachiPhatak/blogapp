@@ -1,7 +1,7 @@
 package com.codeup.blogapp.web;
 
-import com.codeup.blogapp.data.Post;
-import com.codeup.blogapp.data.User;
+import com.codeup.blogapp.data.Post.Post;
+import com.codeup.blogapp.data.User.User;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -85,7 +85,7 @@ public class UsersController {
 
     @PutMapping
     private void updateUser(@RequestBody User user) {
-        users.replace((int) user.getId(), user);
+        users.replace(Math.toIntExact(user.getId()), user);
     }
 
     @DeleteMapping("/{id}")

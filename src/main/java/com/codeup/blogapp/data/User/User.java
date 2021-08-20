@@ -1,15 +1,37 @@
-package com.codeup.blogapp.data;
+package com.codeup.blogapp.data.User;
 
+import com.codeup.blogapp.data.Post.Post;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
 import java.util.Collection;
 
+@Entity
+@Table(name = "users")
 public class User {
-    private long id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(nullable=false, length = 100)
     private String userName;
+
+    @Email
+    @Column(nullable=false, length = 100)
     private String email;
+
+    @Column(nullable=false, length = 100)
     private String password;
-    public Role role = Role.USER;
-    private Collection<Post> posts;
+
     private enum Role{USER, ADMIN};
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    public Role role = Role.USER;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "post")
+    private Collection<Post> posts;
 
     public User() {
     }
@@ -29,7 +51,7 @@ public class User {
         this.posts = posts;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
