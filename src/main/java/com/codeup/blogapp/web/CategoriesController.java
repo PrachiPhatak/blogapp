@@ -31,8 +31,9 @@ public class CategoriesController {
         categoryRepository.save(category);
     }
 
-    @DeleteMapping
-    private void deleteCategory(@PathVariable long id){
+    @DeleteMapping("/{id}")
+    private void deleteCategory(@PathVariable Long id){
+        System.out.println("In delete");
         categoryRepository.deleteById(id);
     }
 }

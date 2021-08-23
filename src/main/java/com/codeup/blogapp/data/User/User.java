@@ -32,7 +32,7 @@ public class User {
     @Column(nullable = false)
     public Role role = Role.USER;
 
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "id")
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "user")
     @JsonManagedReference
     private Collection<Post> posts;
 
