@@ -1,11 +1,12 @@
 package com.codeup.blogapp.data.User;
 
 import com.codeup.blogapp.data.Post.Post;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -32,11 +33,10 @@ public class User {
     public Role role = Role.USER;
 
     @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "id")
-    @JsonR
-    private List<Post> posts;
+    @JsonManagedReference
+    private Collection<Post> posts;
 
-    public User() {
-    }
+    public User() {}
 
     public User(long id, String userName, String email, String password) {
         this.id = id;
@@ -45,7 +45,7 @@ public class User {
         this.password = password;
     }
 
-    public User(long id, String userName, String email, String password, List<Post> posts) {
+    public User(long id, String userName, String email, String password, Collection<Post> posts) {
         this.id = id;
         this.userName = userName;
         this.email = email;
@@ -57,11 +57,11 @@ public class User {
         this.id = id;
     }
 
-    public List<Post> getPosts() {
+    public Collection<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(List<Post> posts) {
+    public void setPosts(Collection<Post> posts) {
         this.posts = posts;
     }
 

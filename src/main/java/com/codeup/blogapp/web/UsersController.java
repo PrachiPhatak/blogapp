@@ -4,6 +4,8 @@ import com.codeup.blogapp.data.User.User;
 import com.codeup.blogapp.data.User.UsersRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
+
 @RestController
 @RequestMapping(value = "/api/users", headers = "Accept=application/json")
 public class UsersController {
@@ -14,6 +16,12 @@ public class UsersController {
         this.usersRepository = usersRepository;
     }
 
+
+    @GetMapping
+    private Collection<User> getUser() {
+        return usersRepository.findAll();
+    }
+
     @GetMapping("/{id}")
     private User getUser(@PathVariable long id) {
         return usersRepository.findById(id).get();
@@ -21,12 +29,12 @@ public class UsersController {
 
     @GetMapping("/findByUsername")
     private User findByUserName(@RequestParam String userName) {
-        return new User();
+        return usersRepository.findByUserName(userName);
     }
 
     @GetMapping("findByEmail")
     private User findByUserEmail(@RequestParam String email) {
-        return null;
+        return usersRepository.findByEmail(email);
     }
 
     @PostMapping
@@ -36,7 +44,6 @@ public class UsersController {
         System.out.println(user.getEmail());
         System.out.println(user.getPassword());
         usersRepository.save(user);
-
     }
 
     @PutMapping
