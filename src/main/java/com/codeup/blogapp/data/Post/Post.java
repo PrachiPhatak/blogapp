@@ -27,12 +27,15 @@ public class Post {
     @JsonBackReference
     private User user;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH,
+            CascadeType.PERSIST, CascadeType.REFRESH})
     //@JsonIgnore
     @JoinTable(
-        name="post_category",
-        joinColumns = {@JoinColumn(name = "post_id")},
-        inverseJoinColumns = {@JoinColumn(name="category_id")}
+            name="post_category",
+            joinColumns = {@JoinColumn(name = "post_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="category_id", nullable = false, updatable = false)},
+            foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+            inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT)
     )
     private Collection<Category> categories;
 
