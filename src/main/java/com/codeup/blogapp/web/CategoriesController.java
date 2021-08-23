@@ -1,32 +1,38 @@
 package com.codeup.blogapp.web;
 
-import com.codeup.blogapp.data.Category;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.codeup.blogapp.data.Category.Category;
+import com.codeup.blogapp.data.Category.CategoryRepository;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/categories", headers = "application/json")
 public class CategoriesController {
 
-    List<Category> categories;
+    private final CategoryRepository categoryRepository;
 
-    CategoriesController() {
-        categories = new ArrayList<>();
-        categories.add(new Category(1,"minimal living"));
-        categories.add(new Category(2,"self development"));
-        categories.add(new Category(3,"money"));
+    CategoriesController(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
     }
 
     @GetMapping
     private List<Category> getCategories() {
-        return categories;
+        return categoryRepository.findAll();
     }
 
+    @PostMapping
     private void createCategories(Category category){
-        categories.add(category);
+        categoryRepository.save(category);
+    }
+
+    @PutMapping
+    private void updateCategory(Category category){
+        categoryRepository.save(category);
+    }
+
+    @DeleteMapping
+    private void deleteCategory(@PathVariable long id){
+        categoryRepository.deleteById(id);
     }
 }

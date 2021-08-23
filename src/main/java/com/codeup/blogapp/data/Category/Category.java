@@ -1,9 +1,9 @@
-package com.codeup.blogapp.data;
+package com.codeup.blogapp.data.Category;
 
 import com.codeup.blogapp.data.Post.Post;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -16,7 +16,7 @@ public class Category {
     private String name;
 
     @ManyToMany(mappedBy = "categories")
-    private Collection<Post> posts;
+    private List<Post> posts;
 
     public Category(long id, String name) {
         this.id = id;
@@ -43,11 +43,11 @@ public class Category {
         this.name = name;
     }
 
-    public Collection<Post> getPosts() {
+    public List<Post> getPosts() {
         return posts;
     }
 
-    public void setPosts(Collection<Post> posts) {
+    public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
 }

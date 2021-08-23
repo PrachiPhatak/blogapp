@@ -5,33 +5,35 @@ import com.codeup.blogapp.data.Post.Post;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable=false, length = 100)
+    @Column(nullable = false, length = 100)
     private String userName;
 
     @Email
-    @Column(nullable=false, length = 100)
+    @Column(nullable = false, length = 100)
     private String email;
 
-    @Column(nullable=false, length = 100)
+    @Column(nullable = false, length = 100)
     private String password;
 
-    private enum Role{USER, ADMIN};
+    private enum Role {USER, ADMIN};
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     public Role role = Role.USER;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "post")
-    private Collection<Post> posts;
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "id")
+    @JsonR
+    private List<Post> posts;
 
     public User() {
     }
@@ -43,11 +45,23 @@ public class User {
         this.password = password;
     }
 
-    public User(long id, String userName, String email, String password, Collection<Post>posts) {
+    public User(long id, String userName, String email, String password, List<Post> posts) {
         this.id = id;
         this.userName = userName;
         this.email = email;
         this.password = password;
+        this.posts = posts;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
         this.posts = posts;
     }
 
