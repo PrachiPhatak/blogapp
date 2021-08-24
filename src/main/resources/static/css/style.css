@@ -1,86 +1,103 @@
-body {
-    background: #19aa8d;
-    font-family: 'Roboto', sans-serif;
+/* stylelint-disable selector-list-comma-newline-after */
+
+.blog-header {
+    line-height: 1;
+    border-bottom: 1px solid #e5e5e5;
 }
-.form-control {
-    font-size: 15px;
+
+.blog-header-logo {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
+    font-size: 2.25rem;
 }
-.form-control, .form-control:focus, .input-group-text {
-    border-color: #e1e1e1;
+
+.blog-header-logo:hover {
+    text-decoration: none;
 }
-.form-control, .btn {
-    border-radius: 3px;
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif/*rtl:Amiri, Georgia, "Times New Roman", serif*/;
 }
-.signup-form {
-    width: 400px;
-    margin: 0 auto;
-    padding: 30px 0;
+
+.display-4 {
+    font-size: 2.5rem;
 }
-.signup-form form {
-    color: #999;
-    border-radius: 3px;
-    margin-bottom: 15px;
-    background: #fff;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    padding: 30px;
+@media (min-width: 768px) {
+    .display-4 {
+        font-size: 3rem;
+    }
 }
-.signup-form h2 {
-    color: #333;
-    font-weight: bold;
-    margin-top: 0;
+
+.nav-scroller {
+    position: relative;
+    z-index: 2;
+    height: 2.75rem;
+    overflow-y: hidden;
 }
-.signup-form hr {
-    margin: 0 -30px 20px;
-}
-.signup-form .form-group {
-    margin-bottom: 20px;
-}
-.signup-form label {
-    font-weight: normal;
-    font-size: 15px;
-}
-.signup-form .form-control {
-    min-height: 38px;
-    box-shadow: none !important;
-}
-.signup-form .input-group-addon {
-    max-width: 42px;
+
+.nav-scroller .nav {
+    display: flex;
+    flex-wrap: nowrap;
+    padding-bottom: 1rem;
+    margin-top: -1px;
+    overflow-x: auto;
     text-align: center;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
 }
-.signup-form .btn, .signup-form .btn:active {
-    font-size: 16px;
-    font-weight: bold;
-    background: #19aa8d !important;
-    border: none;
-    min-width: 140px;
+
+.nav-scroller .nav-link {
+    padding-top: .75rem;
+    padding-bottom: .75rem;
+    font-size: .875rem;
 }
-.signup-form .btn:hover, .signup-form .btn:focus {
-    background: #179b81 !important;
+
+.card-img-right {
+    height: 100%;
+    border-radius: 0 3px 3px 0;
 }
-.signup-form a {
-    color: #fff;
-    text-decoration: underline;
+
+.flex-auto {
+    flex: 0 0 auto;
 }
-.signup-form a:hover {
-    text-decoration: none;
+
+.h-250 { height: 250px; }
+@media (min-width: 768px) {
+    .h-md-250 { height: 250px; }
 }
-.signup-form form a {
-    color: #19aa8d;
-    text-decoration: none;
+
+/* Pagination */
+.blog-pagination {
+    margin-bottom: 4rem;
 }
-.signup-form form a:hover {
-    text-decoration: underline;
+.blog-pagination > .btn {
+    border-radius: 2rem;
 }
-.signup-form .fa {
-    font-size: 21px;
+
+/*
+ * Blog posts
+ */
+.blog-post {
+    margin-bottom: 4rem;
 }
-.signup-form .fa-paper-plane {
-    font-size: 18px;
+.blog-post-title {
+    margin-bottom: .25rem;
+    font-size: 2.5rem;
 }
-.signup-form .fa-check {
-    color: #fff;
-    left: 17px;
-    top: 18px;
-    font-size: 7px;
-    position: absolute;
+.blog-post-meta {
+    margin-bottom: 1.25rem;
+    color: #727272;
+}
+
+/*
+ * Footer
+ */
+.blog-footer {
+    padding: 2.5rem 0;
+    color: #727272;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-top: .05rem solid #e5e5e5;
+}
+.blog-footer p:last-child {
+    margin-bottom: 0;
 }
