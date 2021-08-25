@@ -21,7 +21,7 @@ public class Post {
     @Column(nullable = false, length=120)
     private String title;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
     @ManyToOne
