@@ -4,9 +4,11 @@ export default function PostIndex(props) {
     console.log(props)
     return `
         <main>
+        
             <div class="container row row-cols-1 mx-auto">
                 <div class="col-12 m-3">
                     <form id="post-form" class=" card shadow-sm p-3">
+                        <p id="error"></p>
                         <h5> New Blog </h5>
                         <input id="title" class="border-box m-1" name="title" type="text" placeholder="Blog Title"/>
                         <textarea cols="20"  class="m-1" id="content" name="content" type="text" placeholder="Content"></textarea>

@@ -2,6 +2,7 @@ package com.codeup.blogapp.web;
 
 import com.codeup.blogapp.data.Post.Post;
 import com.codeup.blogapp.data.Post.PostsRepository;
+import com.codeup.blogapp.data.User.UsersRepository;
 import com.codeup.blogapp.service.EmailService;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +14,12 @@ public class PostController {
 
     private final EmailService emailService;
     private final PostsRepository postsRepository;
+    private final UsersRepository usersRepository;
 
-    PostController(EmailService emailService, PostsRepository postsRepository) {
+    PostController(EmailService emailService, PostsRepository postsRepository, UsersRepository usersRepository) {
         this.emailService = emailService;
         this.postsRepository = postsRepository;
+        this.usersRepository = usersRepository;
     }
 
     @GetMapping
@@ -30,14 +33,15 @@ public class PostController {
     }
 
     @PostMapping
-    private void createPost(@RequestBody Post post) {
+    private void createPostAndEmail(@RequestBody Post post) {
         System.out.println(post.getTitle());
         System.out.println(post.getContent());
         if(post.getUser()!= null)
             System.out.println(post.getUser().getUserName());
-
+        else
+            post.setUser(usersRepository.getById(1L));
         postsRepository.save(post);
-        emailService.prepareAndSend(post,"Subject: test email", "This is test email for the post");
+        emailService.prepareAndSend(post,post.getTitle(), post.getContent());
     }
 
     @PutMapping
