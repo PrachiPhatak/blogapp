@@ -1,4 +1,4 @@
-package com.codeup.errors;
+package com.codeup.blogapp.errors;
 
 import org.springframework.util.StringUtils;
 

@@ -1,4 +1,4 @@
-package com.codeup.errors;
+package com.codeup.blogapp.errors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;

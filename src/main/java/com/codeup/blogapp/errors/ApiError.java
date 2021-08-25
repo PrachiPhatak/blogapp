@@ -1,4 +1,4 @@
-package com.codeup.errors;
+package com.codeup.blogapp.errors;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

@@ -1,4 +1,4 @@
-package com.codeup.errors;
+package com.codeup.blogapp.errors;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;

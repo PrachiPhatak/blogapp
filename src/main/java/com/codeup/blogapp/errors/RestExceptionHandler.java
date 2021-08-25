@@ -1,4 +1,4 @@
-package com.codeup.errors;
+package com.codeup.blogapp.errors;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
