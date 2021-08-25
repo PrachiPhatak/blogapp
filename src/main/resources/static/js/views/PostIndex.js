@@ -4,9 +4,9 @@ export default function PostIndex(props) {
     console.log(props)
     return `
         <main>
-        
-            <div class="container row row-cols-1 mx-auto">
-                <div class="col-12 m-3">
+            <div class="container">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mx-auto">
+                <div class="col-12 my-3">
                     <form id="post-form" class=" card shadow-sm p-3">
                         <p id="error"></p>
                         <h5> New Blog </h5>
@@ -17,6 +17,7 @@ export default function PostIndex(props) {
                 </div>
                  ${props.posts.map(post => `${printOutBlogs(post)}`).join('')}  
             </div>
+            </div>
         </main>
     `;
 }
@@ -26,10 +27,13 @@ function printOutBlogs(post) {
     let categories1 = post.categories;
     console.log(categories1);
     return `
-        <div class="col m-3">
-            <div class="card shadow-sm">
+        <div class="p-3">
+            <div class="card shadow-sm p-0">
                   <h5 contenteditable="false" class="card-header title"> ${post.title}</h5>
-                  <p contenteditable="false"  class="p-3 card-text content">${post.content}</p>
+                  <p contenteditable="false"  class="p-3 card-text content">
+                        ${post.content.substring(0, 150)} <a href="#">Read more...</a>
+                  
+                  </p>
                   <p class="px-3 author">By ${post.user.userName}</p>
                   <div class="px-3 text-muted">
                        ${categories1.map(category =>
