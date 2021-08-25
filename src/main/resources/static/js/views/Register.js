@@ -20,8 +20,8 @@ export default function Register(props) {
                                 </style>
         </head>
         <body>
-            <div class="signup-form">
-                <form>
+            <div class="signup-form container">
+                <form class=" border-box">
                     <h2>Sign Up</h2>
                     <p>Please fill in this form to create an account!</p>
                     <hr>
@@ -81,13 +81,13 @@ export default function Register(props) {
 
 }
 
-export function RegisterEvent(){
+export function RegisterEvent() {
 
     console.log("In RegisterEvent");
 
-    $(".submit").click(function (){
+    $(".submit").click(function () {
         let user = {
-            id:0,
+            id: 0,
             userName: $("#username").val(),
             password: $("#password").val(),
             email: $("#email").val()
@@ -104,10 +104,10 @@ export function RegisterEvent(){
         };
         console.log(options)
         fetch(url, options)
-        .then(data => {
-            console.log(data)
-            createView("/")
-        })
+            .then(data => {
+                console.log(data)
+                createView("/")
+            })
             .catch(error => console.error(error)); /* handle errors */
     });
 

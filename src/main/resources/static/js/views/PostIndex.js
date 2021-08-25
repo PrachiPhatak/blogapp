@@ -4,18 +4,16 @@ export default function PostIndex(props) {
     console.log(props)
     return `
         <main>
-            <div class="container row row-cols-1 row-cols-sm-2 row-cols-md-2 m-3">
+            <div class="container row row-cols-1 mx-auto">
                 <div class="col-12 m-3">
                     <form id="post-form" class=" card shadow-sm p-3">
                         <h5> New Blog </h5>
-                        <input id="title" class="border-box" name="title" type="text" placeholder="Blog Title"/>
-                        <textarea cols="20"  id="content" name="content" type="text" placeholder="Content"></textarea>
-                        <button id="post-btn" class="btn-sm" type="submit"> Post </button>
+                        <input id="title" class="border-box m-1" name="title" type="text" placeholder="Blog Title"/>
+                        <textarea cols="20"  class="m-1" id="content" name="content" type="text" placeholder="Content"></textarea>
+                        <button id="post-btn" class="btn-sm m-1" type="submit"> Post </button>
                     </form>
                 </div>
-                
                  ${props.posts.map(post => `${printOutBlogs(post)}`).join('')}  
-                 
             </div>
         </main>
     `;
@@ -26,20 +24,22 @@ function printOutBlogs(post) {
     let categories1 = post.categories;
     console.log(categories1);
     return `
-            <div class="col m-3">
-                <div class=" card shadow-sm p-3">
-                      <h5 contenteditable="false" class="title"> ${post.title}</h5>
-                      <p contenteditable="false"  class="content">${post.content}</p>
-                      <p  class="author">By ${post.user.userName}</p>
-                       ${categories1.map(category => 
-                        `
-                        <span class="col-3 badge rounded-pill bg-secondary">#${category.name}</span>
-                        `
-                        )}                                             
-                      <button data-id="${post.id}" class="col-5 btn-sm edit-save-btn" > Edit </button>
-                      <button data-id="${post.id}" class="col-5 btn-sm delete-cancel-btn" > Delete </button>
-                 </div>
-             </div>
+        <div class="col m-3">
+            <div class="card shadow-sm">
+                  <h5 contenteditable="false" class="card-header title"> ${post.title}</h5>
+                  <p contenteditable="false"  class="p-3 card-text content">${post.content}</p>
+                  <p class="px-3 author">By ${post.user.userName}</p>
+                  <div class="px-3 text-muted">
+                       ${categories1.map(category =>
+                            `#${category.name} `
+                        )}
+                   </div>
+                   <div class="d-flex justify-content-around m-3">
+                        <button data-id="${post.id}" class="col-4 btn btn-secondary edit-save-btn" > Edit </button>
+                        <button data-id="${post.id}" class="col-4 btn btn-secondary delete-cancel-btn" > Delete </button>
+                  </div>
+            </div>
+        </div>
     `
 }
 
