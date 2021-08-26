@@ -27,7 +27,7 @@ public class PostController {
         return postsRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("findById/{id}")
     private Post getPostById(@PathVariable long id) {
         return postsRepository.findById(id).get();
     }

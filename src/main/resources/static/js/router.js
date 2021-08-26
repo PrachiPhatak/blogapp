@@ -7,7 +7,7 @@ import Login from "./views/Login.js";
 import LoginEvent from "./auth.js";
 import Register, {RegisterEvent} from "./views/Register.js";
 import User from "./views/User.js";
-import BlogDetails from "./views/BlogDetails";
+import BlogDetails, {CreatePost} from "./views/BlogDetails.js";
 
 /**
  * Returns the route object for a specific route based on the given URI
@@ -40,9 +40,12 @@ export default function router(URI) {
         },
         '/details': {
             returnView: BlogDetails,
-            state: {},
+            state: {
+                categories:'/api/categories'
+            },
             uri: '/details',
-            title: 'All Posts',
+            title: 'Post Details',
+            viewEvent: CreatePost
         },
         '/register': {
             returnView: Register,

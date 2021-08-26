@@ -24,7 +24,10 @@ export default function createView(URI) {
        // headers: getAuthBearerTokenHeader()
         headers:{'Content-Type': 'application/json'}
     }
+    console.log(route.state);
+    console.log(request);
     fetchData(route.state, request).then((props) => {
+        console.log(props)
         render(props, route);
     });
 }

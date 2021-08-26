@@ -6,14 +6,10 @@ export default function PostIndex(props) {
         <main>
             <div class="container">
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 mx-auto">
-                <div class="col-12 my-3">
-                    <form id="post-form" class=" card shadow-sm p-3">
-                        <p id="error"></p>
-                        <h5> New Blog </h5>
-                        <input id="title" class="border-box m-1" name="title" type="text" placeholder="Blog Title"/>
-                        <textarea cols="20"  class="m-1" id="content" name="content" type="text" placeholder="Content"></textarea>
-                        <button id="post-btn" class="btn-sm m-1" type="submit"> Post </button>
-                    </form>
+                <div class="col-12 my-3 text-center">
+                    <p>Writing out and articulating your thoughts is a great way to internalize something 
+                    <br>you’ve learned or experienced</p>
+                    <button id="addNewBlog" class="btn btn-secondary text-center">Add new post</button> 
                 </div>
                  ${props.posts.map(post => `${printOutBlogs(post)}`).join('')}  
             </div>
@@ -23,28 +19,23 @@ export default function PostIndex(props) {
 }
 
 function printOutBlogs(post) {
-    console.log(post)
+    //console.log(post)
     let categories1 = post.categories;
-    console.log(categories1);
+    //console.log(categories1);
     return `
         <div class="p-3">
             <div class="card shadow-sm p-0">
-                   <button id="addNewBlog">Add new post</button>
+                  
                   <h5 contenteditable="false" class="card-header title"> ${post.title}</h5>
                   <p contenteditable="false"  class="p-3 card-text content">
-                        ${post.content.substring(0, 150)} <a href="#">Read more...</a>
-                  
+                        ${post.content.substring(0, 150)} <a href="#" class="readMore" data-id="${post.id}">Read more...</a>
                   </p>
                   <p class="px-3 author">By ${post.user.userName}</p>
-                  <div class="px-3 text-muted">
+                  <div class="p-3 text-muted">
                        ${categories1.map(category =>
-                            `#${category.name} `
+                            ` #${category.name}`
                         )}
                    </div>
-                   <div class="d-flex justify-content-around m-3">
-                        <button data-id="${post.id}" class="col-4 btn btn-secondary edit-save-btn" > Edit </button>
-                        <button data-id="${post.id}" class="col-4 btn btn-secondary delete-cancel-btn" > Delete </button>
-                  </div>
             </div>
         </div>
     `
@@ -52,9 +43,9 @@ function printOutBlogs(post) {
 
 
 export function PostEvent() {
-    createPost();
+    //createPost();
     editPost();
-    deleteCancelPost();
+    //deleteCancelPost();
     addNewBlog();
 
 }
@@ -93,16 +84,38 @@ function createPost() {
 }
 
 function editPost() {
-    $(".edit-save-btn").click(function () {
-        $(this).text("Save");
-        $(this).parentsUntil(".card").children(".delete-cancel-btn").text("Cancel");
-        let editableFields = ($(this).parentsUntil(".card").children("[contenteditable]"));
-        editableFields.attr("contenteditable", "true");
-        editableFields.toggleClass("form-control");
-        $(this).parentsUntil(".card").children('.title').attr("data-oldText",$(this).parentsUntil(".card").children('.title').text());
-        $(this).parentsUntil(".card").children('.content').attr("data-oldText",$(this).parentsUntil(".card").children('.content').text());
-        $(this).on("click", savePost);
-    });
+    console.log("Yay! edit  blog");
+    $(".readMore").click(function () {
+        let id = $(this).attr("data-id");
+        console.log("post-id"+$(this).attr("data-id"));
+        const url = `http://localhost:8080/api/posts/findById/${id}`;
+        const options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+        fetch(url, options)
+            .then(data => {
+                console.log(data)
+                createView("/details")
+            })
+            .catch(error => console.error(error)); /* handle errors */
+
+    })
+
+
+
+    // $(".edit-save-btn").click(function () {
+    //     $(this).text("Save");
+    //     $(this).parentsUntil(".card").children(".delete-cancel-btn").text("Cancel");
+    //     let editableFields = ($(this).parentsUntil(".card").children("[contenteditable]"));
+    //     editableFields.attr("contenteditable", "true");
+    //     editableFields.toggleClass("form-control");
+    //     $(this).parentsUntil(".card").children('.title').attr("data-oldText",$(this).parentsUntil(".card").children('.title').text());
+    //     $(this).parentsUntil(".card").children('.content').attr("data-oldText",$(this).parentsUntil(".card").children('.content').text());
+    //     $(this).on("click", savePost);
+    // });
 }
 
 function savePost() {
