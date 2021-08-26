@@ -10,7 +10,6 @@ export default function Home(props) {
                 <div class="row row-cols-1 ">
                     <img src="../../images/blog4.svg" alt="">
                 </div>
-                
             </div>
         </main>
     `;

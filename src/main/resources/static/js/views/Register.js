@@ -20,7 +20,8 @@ export default function Register(props) {
                                 </style>
         </head>
         <body>
-            <div class="signup-form container">
+            <div class="container border shadow-lg p-5 mt-2">
+                <div class="signup-form">
                 <form class=" border-box">
                     <h2>Sign Up</h2>
                     <p>Please fill in this form to create an account!</p>
@@ -70,10 +71,11 @@ export default function Register(props) {
                             <label class="form-check-label"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
                         </div>
                         <div class="form-group">
-                            <button class="submit btn btn-primary btn-lg">Sign Up</button>
+                            <button class="submit btn btn-secondary">Sign Up</button>
                         </div>
                 </form>
                 <div class="text-center">Already have an account? <a href="#">Login here</a></div>
+            </div>
             </div>
         </body>
     </html>`;

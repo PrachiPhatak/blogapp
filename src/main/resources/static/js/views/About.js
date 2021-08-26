@@ -2,8 +2,9 @@ export default function About(props) {
     console.log("Props on about page "+ props)
     return `
         <main>
-            <div class="container row row-cols-1  mx-auto mt-3">
-            <div>
+        <div class="container p-5 shadow-lg border mt-3">
+            <div class="row row-cols-1 mx-auto">
+                <div>
             <div class="WI9k4c" style="display: table; word-break: break-word; color: rgb(32, 33, 36); font-family: Roboto, arial, sans-serif; font-size: medium; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial;">
     <div class="jY7QFf" style="min-height: 36px; margin-bottom: 0px; line-height: normal;">
         <div class="c8d6zd ya2TWb DgZBFd" style='font-family: "Google Sans", Roboto, arial, sans-serif; letter-spacing: normal; color: rgb(32, 33, 36); font-size: 28px; font-weight: 400; line-height: 36px; vertical-align: top; margin-top: -6px;'><span data-dobid="hdw">blog</span></div>
@@ -65,6 +66,7 @@ export default function About(props) {
     </div>
 </div>
         </div>
+            </div>
         </div>
         </main>
     `;

@@ -29,6 +29,7 @@ function printOutBlogs(post) {
     return `
         <div class="p-3">
             <div class="card shadow-sm p-0">
+                   <button id="addNewBlog">Add new post</button>
                   <h5 contenteditable="false" class="card-header title"> ${post.title}</h5>
                   <p contenteditable="false"  class="p-3 card-text content">
                         ${post.content.substring(0, 150)} <a href="#">Read more...</a>
@@ -49,10 +50,20 @@ function printOutBlogs(post) {
     `
 }
 
+
 export function PostEvent() {
     createPost();
     editPost();
     deleteCancelPost();
+    addNewBlog();
+
+}
+
+function addNewBlog() {
+    console.log("Yay! add new blog");
+    $("#addNewBlog").click(function () {
+        createView("/details")
+    })
 }
 
 function createPost() {
@@ -84,12 +95,12 @@ function createPost() {
 function editPost() {
     $(".edit-save-btn").click(function () {
         $(this).text("Save");
-        $(this).siblings(".delete-cancel-btn").text("Cancel");
-        let editableFields = ($(this).siblings("[contenteditable]"));
+        $(this).parentsUntil(".card").children(".delete-cancel-btn").text("Cancel");
+        let editableFields = ($(this).parentsUntil(".card").children("[contenteditable]"));
         editableFields.attr("contenteditable", "true");
         editableFields.toggleClass("form-control");
-        $(this).siblings('.title').attr("data-oldText",$(this).siblings('.title').text());
-        $(this).siblings('.content').attr("data-oldText",$(this).siblings('.content').text());
+        $(this).parentsUntil(".card").children('.title').attr("data-oldText",$(this).parentsUntil(".card").children('.title').text());
+        $(this).parentsUntil(".card").children('.content').attr("data-oldText",$(this).parentsUntil(".card").children('.content').text());
         $(this).on("click", savePost);
     });
 }
@@ -98,11 +109,11 @@ function savePost() {
 
     $(this).text("Edit");
     $(".delete-cancel-btn").text("Delete");
-    let editableFields = ($(this).siblings("[contenteditable]"));
+    let editableFields = ($(this).parentsUntil(".card").children("[contenteditable]"));
 
     let obj = {
-        title: $(this).siblings(".title").text(),
-        content: $(this).siblings(".content").text(),
+        title: $(this).parentsUntil(".card").children(".title").text(),
+        content: $(this).parentsUntil(".card").children(".content").text(),
         id: $(this).attr("data-id")
     }
 
@@ -138,11 +149,11 @@ function deleteCancelPost() {
             //On Cancel
             $(this).text("Delete");
             $(".edit-save-btn").text("Edit");
-            let editableFields = ($(this).siblings("[contenteditable]"));
+            let editableFields = ($(this).parentsUntil(".card").children("[contenteditable]"));
             editableFields.attr("contenteditable", "false");
             editableFields.toggleClass("form-control");
-            $(this).siblings('.title').text($(this).siblings('.title').attr("data-oldText"));
-            $(this).siblings('.content').text($(this).siblings('.content').attr("data-oldText"));
+            $(this).parentsUntil(".card").children('.title').text($(this).parentsUntil(".card").children('.title').attr("data-oldText"));
+            $(this).parentsUntil(".card").children('.content').text($(this).parentsUntil(".card").children('.content').attr("data-oldText"));
         }
     });
 }
