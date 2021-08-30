@@ -1,5 +1,6 @@
 package com.codeup.blogapp;
 
+//Sample class
 public class Person {
 
     private String name;
