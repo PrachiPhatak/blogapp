@@ -49,6 +49,15 @@ public class UsersController {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         usersRepository.save(user);
     }
+    @PostMapping
+    private void createUser1(@RequestBody User user) {
+        System.out.println(user.getId());
+        System.out.println(user.getUserName());
+        System.out.println(user.getEmail());
+        System.out.println(user.getPassword());
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        usersRepository.save(user);
+    }
 
     @PutMapping
     private void updateUser(@RequestBody User user) {
