@@ -33,7 +33,6 @@ public class CategoriesController {
 
     @DeleteMapping("/{id}")
     private void deleteCategory(@PathVariable Long id){
-        System.out.println("In delete");
         categoryRepository.deleteById(id);
     }
 }
