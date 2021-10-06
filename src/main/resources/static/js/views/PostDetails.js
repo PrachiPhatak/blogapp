@@ -15,11 +15,8 @@ function getCategories() {
         .catch(error => console.error(error)); /* handle errors */
 }
 
-export default function BlogDetails(props) {
-     // let categories = getCategories();
-     // console.log(categories)
-    console.log("Props from Blogdetails: "+ props.error)
-    console.log(props.categories.error.error);
+export default function PostDetailsComponent(props) {
+    console.log(props.posts)
     return `
         <main>
             <div class="container">
@@ -28,9 +25,9 @@ export default function BlogDetails(props) {
                     <form id="post-form" class=" card shadow-sm p-3">
                         <p id="error"></p>
                         <h5> New Blog </h5>
-                        <input id="title" class="border-box m-1" name="title" type="text" placeholder="Blog Title"/>
-                        <textarea cols="20" class="m-1" id="content" name="content" type="text" placeholder="Content"></textarea>
-                        <button id="post-btn" class="btn-sm m-1" type="submit"> Post </button>
+                        <input id="title" class="border-box m-1" name="title" type="text" placeholder="Blog Title" value = "${props.posts.title}"/>
+                        <textarea cols="20" class="m-1" id="content" name="content" type="text" placeholder="Content">${props.posts.content}</textarea>
+                        <button id="post-btn" class="btn-sm m-1" type="submit" data-id =${props.posts.user.id}> Post </button>
                     </form>
                 </div>
         </main>
@@ -42,6 +39,7 @@ export function CreatePost() {
         let obj = {
             title: document.querySelector("#title").value,
             content: document.querySelector("#content").value,
+            id: $(this).attr("data-id")
         }
 
         const url = `http://localhost:8080/api/posts`;
