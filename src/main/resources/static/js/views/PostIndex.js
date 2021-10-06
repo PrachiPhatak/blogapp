@@ -88,19 +88,19 @@ function editPost() {
     $(".readMore").click(function () {
         let id = $(this).attr("data-id");
         console.log("post-id"+$(this).attr("data-id"));
-        const url = `http://localhost:8080/api/posts/findById/${id}`;
-        const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        };
-        fetch(url, options)
-            .then(data => {
-                console.log(data)
-                createView("/details")
-            })
-            .catch(error => console.error(error)); /* handle errors */
+        // const url = `http://localhost:8080/api/posts/findById/${id}`;
+        // const options = {
+        //     method: 'GET',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        // };
+        // fetch(url, options)
+        //     .then(data => {
+        //         console.log(data)
+                createView("/details", id);
+            // })
+            // .catch(error => console.error(error)); /* handle errors */
 
     })
 

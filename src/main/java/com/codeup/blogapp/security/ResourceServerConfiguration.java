@@ -35,11 +35,12 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
                 .and()
                 .authorizeRequests()
                 // TODO:
-//                .antMatchers("/api/users/**").hasAnyAuthority("ADMIN", "USER")
+                .antMatchers("/swagger-ui/api/users/**", "/v3/api-docs/**").permitAll()
+                .antMatchers("/api/users/create/**").hasAnyAuthority("ADMIN", "USER")
 //                .antMatchers("/api/posts/**").hasAnyAuthority("ADMIN", "USER")
-//                .antMatchers("/api/**").authenticated()
-                .antMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                .antMatchers("/api/users/create").permitAll()
+               // .antMatchers("/api/**").authenticated()
+                // TODO: add allowed paths
+//                .antMatchers("/api/users/create","/api/users/all" ).permitAll()
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
